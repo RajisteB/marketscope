@@ -1,0 +1,28 @@
+{
+  "name": "marketscope",
+  "version": "1.0.0",
+  "description": "Mock Financial Portfolio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RajisteB/marketscope.git"
+  },
+  "author": "Rajiste K. Bennin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RajisteB/marketscope/issues"
+  },
+  "homepage": "https://github.com/RajisteB/marketscope#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.6.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.5",
+    "nodemon": "^1.18.3"
+  }
+}
