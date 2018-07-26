@@ -2,12 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PortfolioSchema = new Schema({
-  currentValue: {
-    type: Number,
+  symbol: {
+    type: String, required: true
   },
-  holdings: {
-    type: Map,
-    of: String
+  size: {
+    type: Number, required: true
+  },
+  price: {
+    type: Number, required: true
+  },
+  value: {
+    type: Number, required: true
   },
   date: {
     type: Date,
