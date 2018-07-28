@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const data = require('./routes/external/data');
 const portfolio = require('./routes/internal/portfolio');
-const trade = require('./routes/internal/trade');
 
 // Init App
 const app = express();
@@ -16,9 +16,8 @@ mongoose
   .catch(err => console.log(err));
   
 // Routes
+app.use('/search', data);
 app.use('/portfolio', portfolio);
-app.use('/trades', trade);
-
 // Set Port
 const port = process.env.PORT || 3001;
 
