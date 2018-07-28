@@ -1,5 +1,4 @@
 const express = require('express');
-const router = express.Router();
 const Trades = require('../models/trade_model');
 
 function getTrades(req, res) {
