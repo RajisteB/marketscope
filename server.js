@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const data = require('./routes/external/data');
 const portfolio = require('./routes/internal/portfolio');
+const portValue = require('./routes/internal/profit_loss');
 
 // Init App
 const app = express();
@@ -18,6 +19,7 @@ mongoose
 // Routes
 app.use('/search', data);
 app.use('/portfolio', portfolio);
+app.use('/cash', portValue);
 // Set Port
 const port = process.env.PORT || 3001;
 

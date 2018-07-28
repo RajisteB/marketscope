@@ -42,7 +42,14 @@ function calculateCurrentPnL(req, res, next) {
     });
 }
 
+function getCurrentPnL(req, res) {
+  pnl.find()
+  .then(value => res.json(value))
+  .catch(err => console.log(err));
+}
+
 
 module.exports = {
-  calculateCurrentPnL
+  calculateCurrentPnL,
+  getCurrentPnL
 }
