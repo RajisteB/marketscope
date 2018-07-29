@@ -1,32 +1,30 @@
 import React, { Component } from 'react';
 import './css/App.css';
 import Navbar from './components/navigation/navbar.jsx';
+import Overview from './components/overview/overview.jsx';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      hidden: true,
+      
     }
   }
 
-  showSidebar = () => {
-    this.setState({
-      hidden: !this.state.hidden
-    })
-  }
-
-
   render() {
-    let { hidden } = this.state;
-    let toggleSidebar = null;
-
-    hidden ? toggleSidebar = "sidebar-hide" :
-    toggleSidebar = "sidebar-show";
-
     return (
       <div className="App">
         <Navbar />
+        <div className="layout">
+          <div className="dashboard">
+            <div className="dash-col-01">
+              <Overview />
+            </div>
+            <div className="dash-col-02"></div>
+            <div className="dash-col-03"></div>
+          </div>
+          <div className="footer"></div>
+        </div>
       </div>
     );
   }

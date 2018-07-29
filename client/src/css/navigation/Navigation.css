@@ -12,12 +12,11 @@ html, body {
 
 .nav-container, {
   width: 100%;
-  background: yellow;
 }
 .nav {
   height: 5%;
   padding-top: 5px;
-  background: white;
+  background: #2A2751;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -82,6 +81,7 @@ html, body {
 
 .welcome h4 {
   font-weight: 400;
+  letter-spacing: 1px;
 }
 .avatar {
   width: 48px;

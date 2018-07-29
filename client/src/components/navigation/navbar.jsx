@@ -27,11 +27,12 @@ class Navbar extends Component {
     return (
       <div className="nav-container">
         <div className="nav">
-          <i 
-            class="fab fa-buromobelexperte fa-3x" 
-            onClick={this.showSidebar}
-          ></i>
           <div className="nav-logo">
+            <i 
+              className="fab fa-buromobelexperte fa-3x" 
+              onClick={this.showSidebar}
+              style={{ cursor: "pointer" }}
+            ></i>
             <img src={Logo} alt=""/>arketscope
           </div>
           <div className="welcome">
@@ -43,9 +44,10 @@ class Navbar extends Component {
           <div className="side-menu ">
             <div className="side-menu-container">
               <i 
-                class="fas fa-times-circle fa-2x" 
+                className="fas fa-times-circle fa-2x" 
                 id="menu-exit"
                 onClick={this.showSidebar}
+                style={{ cursor: "pointer" }}
               ></i>
               <img src={Logo} alt=""/>
               <h1>MARKETSCOPE</h1>

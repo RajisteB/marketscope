@@ -1,0 +1,14 @@
+.overview-container {
+  width: 98%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 750px) {
+  .overview-container {
+    margin-top: 5px;
+  }
+}
