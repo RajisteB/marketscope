@@ -1,0 +1,109 @@
+.stock-container {
+  width: 95%;
+  height: 90%;
+  /* background: red; */
+  margin: 0 auto;
+  flex-direction: column;
+
+}
+
+.stock-container h1, 
+.stock-container h2,
+.stock-container h4,
+.stock-container h6 {
+  margin: 2px;
+
+}
+
+.stock-container h1 {
+  font-size: 4em;
+}
+
+.summary {
+  color: #8E94F2;
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center; 
+  font-weight: 300;
+}
+.summary h1 {
+  font-weight: 300;
+}
+.logo-container {
+  height: 60px;
+  width: 60px;
+  background: navy;
+}
+.logo-container img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.trading-container {
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  margin-top: 20px;
+  justify-content:space-around;
+}
+button {
+  color: rgba(250, 250, 250, 0.9);
+  width: 35%;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 2em;
+}
+.buy {
+  background: #1D0EBC;
+}
+.sell {
+  background: #FF5C00;
+}
+
+.financials {
+  color: #4D3ED4;
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  font-weight: 300;
+}
+.financials p {
+  width: 25%;
+}
+
+.chart {
+  width: 100%;
+  height: 35vh;
+  margin: 10px 0px;
+  /* background: blue; */
+}
+.graph {
+  width: 100%;
+  height: 90%;
+  /* background: pink; */
+}
+.timeline {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.timeline button {
+  width: 20%;
+  margin: 8px;
+  border-radius: 15px;
+  background: #FF5C00;
+  letter-spacing: 1px;
+}
+.timeline button p {
+  margin: 2px;
+  font-size: 0.8rem;
+}

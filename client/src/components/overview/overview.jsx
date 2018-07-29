@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../css/overview/Overview.css';
-import PortfolioValue from './portvalue.jsx';
+import MarketList from './marketlist.jsx';
+import ActiveMarketList from './activemarketlist.jsx';
 import axios from 'axios';
 
 class Overview extends Component {
@@ -75,23 +76,66 @@ class Overview extends Component {
       indicate = "red";
     }
 
-    let style = {
-      color: indicate
+    let mostActive = null;
+
+    if (active) {
+      
+      if (active.length === 0 ) {
+        mostActive = (
+          <ActiveMarketList 
+            list={active}
+            name={"Active"}
+            changeColor={"lightpurple"}
+            dataLoaded={false}
+            sign={""}
+          />
+        )
+      } else {
+        mostActive = (
+          <ActiveMarketList 
+            list={active}
+            name={"Actives"}
+            changeColor={"lightpurple"}
+            dataLoaded={true}
+            sign={""}
+          />
+        )
+      } 
     }
     
 
     return (
-      <div className="overview-container">
-        <PortfolioValue 
-          pct={pct}
-          change={change}
-          dollars={dollars}
-          indicate={indicate}
-          gainers={gainers}
-          losers={losers}
-          active={active}
-        />
-      </div>
+      <main>
+        <div className="portfolio-value">
+          <h4>PORTFOLIO VALUE</h4>
+          <div className="amount">
+            <h1>{dollars}.</h1>
+            <span>{change}</span>
+          </div>
+          <h5 style={{ color: indicate }}>{pct}%</h5>
+        </div>
+        <div className="list gainers">
+          <MarketList 
+            list={gainers}
+            name={"Gainers"}
+            changeColor={"limegreen"}
+            dataLoaded={true}
+            sign={"+"}
+          />
+        </div>
+        <div className="list losers">
+          <MarketList 
+            list={losers}
+            name={"Losers"}
+            changeColor={"tomato"}
+            dataLoaded={true}
+            sign={""}
+          />
+        </div>
+        <div className="list actives">
+          {mostActive}
+        </div>
+      </main>
     );
   }
 }

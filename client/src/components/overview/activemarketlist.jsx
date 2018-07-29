@@ -7,7 +7,7 @@ const ActiveMarketList = (props) => {
   if (list && dataLoaded) {
     return (
       <div className="list-container">
-        <h3>Top {name} - {dataLoaded}</h3>
+        <h3>Top {name}</h3>
         <hr/>
         <div className="item-container">
           {
@@ -27,7 +27,7 @@ const ActiveMarketList = (props) => {
   } else {
     return (
       <div className="list-container">
-        <h3>Top {name} - {dataLoaded}</h3>
+        <h3>Top {name}</h3>
         <hr/>
         <div className="item-container">
           <h4 style={{ color: '#FF5C00' }}>Market is Closed...</h4>
