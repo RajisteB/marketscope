@@ -3,6 +3,8 @@ import './css/App.css';
 import Navbar from './components/navigation/navbar.jsx';
 import Searchbar from './components/query/searchbar.jsx';
 import Overview from './components/overview/overview.jsx';
+import Account from './components/account/account.jsx';
+import Footer from './components/footer/footer.jsx';
 
 class App extends Component {
   constructor() {
@@ -26,9 +28,11 @@ class App extends Component {
             <div className="dash-col-02">
               <Searchbar />
             </div>
-            <div className="dash-col-03"></div>
+            <div className="dash-col-03">
+              <Account />
+            </div>
           </div>
-          <div className="footer"></div>
+          <Footer />
         </div>
       </div>
     );

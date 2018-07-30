@@ -1,0 +1,79 @@
+.tables-container {
+  height: 100%;
+  width: 95%;
+  /* background: blue; */
+  margin: 0 auto; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* align-items: center; */
+}
+
+.portfolio, .history {
+  height: 50vh;
+  width: 100%;
+  overflow-y: auto;
+  /* background: red; */
+  border-radius: 4px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.portfolio h3, .history h3 {
+  color: #8E94F2;
+  margin: 5px;
+  letter-spacing: 1px;
+}
+
+.history {
+  height: 30vh;
+  overflow-y: auto;
+  /* background: yellow; */
+}
+
+.portfolio-table {
+  color: #1D0EBC;
+  width: 100%;
+  border-collapse: collapse;
+  /* background: purple; */
+}
+
+tr:nth-child(1) {
+  border-bottom: 0.8px solid cyan;
+}
+td > button {
+  border-radius: 4px;
+  width: 80%;
+  text-align: center;
+  border: none;
+  background: #4D3ED4;
+}
+.table-btn p {
+  color: #FFBB00;
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.trade-history-table {
+  width: 100%;
+  color: #1D0EBC;
+  border-collapse: collapse;
+}
+.trade-history-table > tr:nth-child(1) {
+  border-bottom: 0.5px solid #FF5C00;
+}
+.history-row {
+  color: #FFBB00;
+  background: #4D3ED4;
+}
+.history-row > td:nth-child(1) {
+  color: #FFF;
+}
+
+td, th {
+  text-align: center;
+}
