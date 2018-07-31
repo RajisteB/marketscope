@@ -4,11 +4,24 @@ import {AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer} from 'recha
 class Chart extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      chartTime: [],
+      dataLoaded: false
+    }
+  }
 
+  getChartDataTime = (time) => {
+    this.setState({
+      chartTime: time,
+      dataLoaded: true
+    })
   }
 
   render() {
     let { chartData1d, chartData1m, chartData6m, chartData1y } = this.props;
+    let { chartTime, dataLoaded } = this.state;
+    let timeline = null;
+    dataLoaded ? timeline = chartTime : timeline = chartData1m;
   
     if (chartData1m) {
       console.log(chartData1m);
@@ -16,11 +29,11 @@ class Chart extends Component {
         <div className="chart">
           <div className="graph">
             <ResponsiveContainer width="100%" height="100%" >
-              <AreaChart data={chartData1m} >
+              <AreaChart data={timeline} >
                 <defs>
                   <linearGradient id="colorData" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#1D0EBC" stopOpacity={0.8}/>
-                    <stop offset="95%" stopColor="#1D0EBC" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#4D3ED4" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#4D3ED4" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <XAxis 
@@ -47,16 +60,16 @@ class Chart extends Component {
             </ResponsiveContainer>
           </div>
           <div className="timeline">
-            <button onClick={() => this.getChartDataTime('1d')}>
+            <button onClick={() => this.getChartDataTime(chartData1d)}>
               <p>1D</p>
             </button>
-            <button onClick={() => this.getChartDataTime('6m')}>
+            <button onClick={() => this.getChartDataTime(chartData1m)}>
               <p>3MOS</p>
             </button>
-            <button onClick={() => this.getChartDataTime('3m')}>
+            <button onClick={() => this.getChartDataTime(chartData6m)}>
               <p>6MOS</p>
             </button>
-            <button onClick={() => this.getChartDataTime('1y')}>
+            <button onClick={() => this.getChartDataTime(chartData1y)}>
               <p>YR</p>
             </button>
           </div>

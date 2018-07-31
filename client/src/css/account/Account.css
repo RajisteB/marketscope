@@ -27,7 +27,9 @@
   margin: 5px;
   letter-spacing: 1px;
 }
-
+#port-symbol {
+  color: #D1CCFF;
+}
 .history {
   height: 30vh;
   overflow-y: auto;
@@ -35,7 +37,7 @@
 }
 
 .portfolio-table {
-  color: #1D0EBC;
+  color: goldenrod;
   width: 100%;
   border-collapse: collapse;
   /* background: purple; */
@@ -49,10 +51,11 @@ td > button {
   width: 80%;
   text-align: center;
   border: none;
-  background: #4D3ED4;
+  border: 1px solid #8678FF;
+  background: none;
 }
 .table-btn p {
-  color: #FFBB00;
+  color: #D1CCFF;
   margin: 0;
   font-size: 15px;
   letter-spacing: 1px;
@@ -60,7 +63,7 @@ td > button {
 
 .trade-history-table {
   width: 100%;
-  color: #1D0EBC;
+  color: goldenrod;
   border-collapse: collapse;
 }
 .trade-history-table > tr:nth-child(1) {
@@ -68,10 +71,10 @@ td > button {
 }
 .history-row {
   color: #FFBB00;
-  background: #4D3ED4;
+  background: #100865;
 }
 .history-row > td:nth-child(1) {
-  color: #FFF;
+  color: #D1CCFF;
 }
 
 td, th {
