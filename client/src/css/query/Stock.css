@@ -32,6 +32,10 @@
 }
 .summary h1 {
   font-weight: 300;
+  color: goldenrod;
+}
+.summary h6, .summary h4, .summary h2  {
+  color: goldenrod;
 }
 .logo-container {
   height: 60px;
@@ -52,20 +56,21 @@
 }
 button {
   color: rgba(250, 250, 250, 0.9);
-  width: 35%;
+  width: 30%;
   border-radius: 8px;
   text-align: center;
   font-size: 2em;
+  border: none;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
 }
 .buy {
   background: #1D0EBC;
 }
 .sell {
-  background: #FF5C00;
+  background: rgb(245, 63, 31);
 }
 
 .financials {
-  color: #4D3ED4;
   width: 100%;
   height: 10vh;
   display: flex;
@@ -78,6 +83,8 @@ button {
 }
 .financials p {
   width: 25%;
+  /* color: #A79FF1; */
+  color: goldenrod;
 }
 
 .chart {
@@ -86,9 +93,13 @@ button {
   margin: 10px 0px;
   /* background: blue; */
 }
+.tooltip {
+  width: 120px;height: 120px;
+}
 .graph {
-  width: 100%;
+  width: 95%;
   height: 90%;
+  margin: 0 auto;
   /* background: pink; */
 }
 .timeline {
@@ -97,10 +108,12 @@ button {
   justify-content: space-around;
 }
 .timeline button {
-  width: 20%;
+  width: 15%;
   margin: 8px;
-  border-radius: 15px;
-  background: #FF5C00;
+  border-radius: 5px;
+  background: none;
+  color: goldenrod;
+  border: 1px solid goldenrod;
   letter-spacing: 1px;
 }
 .timeline button p {

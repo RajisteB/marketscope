@@ -47,12 +47,36 @@ class TradeModal extends Component {
   }
 
   render() {
-    let { company, mktData } = this.props;
-    let { open, size, buy, sell } = this.state;
+    let { company, mktData, currentCash } = this.props;
+    let { open, size, buy, sell, cost } = this.state;
     let side = null;
+    let validateCost = null
 
     buy ? side = <option value="BOT">BUY</option> : null;
     sell ? side = <option value="SLD">SELL</option> : null;
+
+    cost > currentCash ? 
+    validateCost = (
+        <div className="actions">
+          <button onClick={this.toggleModalClose}>
+            Cancel
+          </button>
+          <button disabled onClick={this.toggleModal}>
+            Execute
+          </button>
+          <p style={{color: 'red'}}>Please enter a smaller size.</p>
+        </div>
+      ) :
+      validateCost = (
+        <div className="actions">
+          <button onClick={this.toggleModalClose}>
+            Cancel
+          </button>
+          <button onClick={this.toggleModal}>
+            Execute
+          </button>
+        </div>
+      );
 
     return (
       <div className="trading-container">
@@ -94,14 +118,7 @@ class TradeModal extends Component {
               </form>
             </div>
             <br/>
-            <div className="actions">
-              <button onClick={this.toggleModalClose}>
-                Cancel
-              </button>
-              <button onClick={this.toggleModal}>
-                Execute
-              </button>
-            </div>
+            {validateCost}
           </div>
         </Modal>
       </div>

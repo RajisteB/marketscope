@@ -39,7 +39,7 @@ html, body {
 }
 
 .dash-col-01 {
-  background: #1D1A37;
+  background: #141226;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -48,13 +48,13 @@ html, body {
 
 .dash-col-02 {
   /* background: pink; */
-  background: #1D1A37;
+  background: #141226;
   flex: 2;
 }
 
 .dash-col-03 {
   /* background: cyan; */
-  background: #1D1A37;
+  background: #141226;
   flex: 1.8;
 }
 

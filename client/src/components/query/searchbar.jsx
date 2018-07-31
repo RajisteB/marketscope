@@ -14,6 +14,7 @@ class Searchbar extends Component {
       chart6m: [],
       chart1y: [],
       company: "",
+      currentCash: 0,
     }
   }
 
@@ -62,6 +63,17 @@ class Searchbar extends Component {
       .catch(err => console.log(err));
   }
 
+  getPortfolioData = () => {
+    axios.get('/cash/')
+    .then(res => {
+      let current = res.data[0].current;
+      this.setState({
+        currentCash: current
+      })
+    })
+    .catch(err => console.log(err));
+  }
+
   handleChange = (e) => {
     this.setState({
       input: e.target.value.toUpperCase()
@@ -82,10 +94,11 @@ class Searchbar extends Component {
     this.getChartData(this.state.input);
     this.getStockData(this.state.input);
     this.getCompanyData(this.state.input);
+    this.getPortfolioData();
   }
 
   render() {
-    let { input, mktData, chart1d, chart1m, chart6m, chart1y, company } = this.state;
+    let { input, mktData, chart1d, chart1m, chart6m, chart1y, company, currentCash } = this.state;
     return (
       <section>
         <div className="searchbar">
@@ -108,6 +121,7 @@ class Searchbar extends Component {
           chartData1y={chart1y}
           mktData={mktData}
           company={company}
+          currentCash={currentCash}
         />
       </section>
     );

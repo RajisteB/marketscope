@@ -25,6 +25,7 @@ hr {
 }
 .item {
   /* background: white; */
+  background: #1D1A37;
   height: 40%;
   width: 19%;
   text-align: center;

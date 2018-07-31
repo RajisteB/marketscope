@@ -3,6 +3,7 @@ import '../../css/overview/MarketList.css';
 
 const ActiveMarketList = (props) => {
   let { list, name, changeColor, sign, dataLoaded } = props;
+  let style = null;
 
   if (list && dataLoaded) {
     return (
@@ -12,11 +13,12 @@ const ActiveMarketList = (props) => {
         <div className="item-container">
           {
             list.map((sym, idx) => {
+              sym.change >= 0 ? style = { color: '#22CF15'} : style = { color: 'tomato'};
               return (
                 <div className="item" key={idx} style={{ color: `${changeColor}`}}> 
                   <h4>{sym.symbol}</h4>
-                  <h5>{sign}{parseFloat(sym.change).toFixed(2)}</h5>
-                  <h6>{parseFloat(sym.changePercent).toFixed(2)}%</h6>
+                  <h5 style={style}>{sign}{parseFloat(sym.change).toFixed(2)}</h5>
+                  <h6 style={style}>{parseFloat(sym.changePercent).toFixed(2)}%</h6>
                 </div>
               )
             })

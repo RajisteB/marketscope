@@ -10,7 +10,7 @@ class Stock extends Component {
   }
 
   render() {
-    let { chartData1d, chartData1m, chartData6m, chartData1y, company, mktData } = this.props;
+    let { chartData1d, chartData1m, chartData6m, chartData1y, company, mktData, currentCash } = this.props;
     
     if (mktData && company) {
 
@@ -19,6 +19,7 @@ class Stock extends Component {
           <Summary 
             mktData={mktData}
             company={company}
+            currentCash={currentCash}
           />
           <Financials mktData={mktData} />
           <Chart 
