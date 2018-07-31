@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import History from './history.jsx';
+import Portfolio from './portfolio.jsx';
 import '../../css/account/Account.css';
 
 
@@ -9,28 +10,75 @@ class Account extends Component {
     super(props);
     this.state = {
       trades: [],
-      portfolio: ''
+      holdings: '',
+      portfolio: '',
+      currentPrices: [],
     }
+  }
+
+  getCurrentPrices = (symbols) => {
+    axios.get(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=price`)
+    .then(res => {
+      this.setState({
+        currentPrices: res.data
+      });  
+      this.getPortfolioPnL();
+    })
+    .catch(err => console.log(err));
+  }
+
+  getPortfolioPnL = () => {
+    let { holdings, currentPrices } = this.state;
+    
+    holdings.map(held => {
+      held.latest = currentPrices[`${held.symbol}`].price;
+      held.total = (held.latest - held.price).toFixed(2);
+      held.profits = (currentPrices[`${held.symbol}`].price * held.size) - (held.size * held.price);
+    });
+    
+    this.setState({
+      portfolio: holdings
+    })
+  }
+
+  getPortfolio = () => {
+    axios.get('/portfolio')
+    .then(res => {
+      let prices = [];
+
+      res.data.map(stock => {
+        prices.push(stock.symbol);
+      });
+
+      this.setState({
+        holdings: res.data,
+        currentPrices: prices.join(','),
+      });
+
+      this.getCurrentPrices(this.state.currentPrices);
+    })
+    .catch(err => console.log(err));
   }
 
   getTrades = () => {
     axios.get('/trades')
     .then(res => {
-      console.log(res);
       this.setState({
         trades: res.data.sort()
-      })
-    });
+      });
+    })
+    .catch(err => console.log(err));
   }
 
   componentDidMount() {
     this.getTrades();
+    this.getPortfolio();
   }
 
 
   render() {
-    let { trades, portfolio } = this.state;
-    // console.log(typeof trades)
+    let { trades, portfolio, currentPrices } = this.state;
+    
     return (
       <div className="tables-container">
         <div className="portfolio">
@@ -39,21 +87,11 @@ class Account extends Component {
             <tr>
               <th>Symbol</th>
               <th>Shares</th>
-              <th>Price</th>
+              <th>AvgPrice</th>
               <th>Change</th>
-              <th>Trade</th>
+              <th>Total</th>
             </tr>
-            <tr>
-              <td id="port-symbol">NFLX</td>
-              <td>400</td>
-              <td>$312.50</td>
-              <td>3.25</td>
-              <td>
-                <button className="table-btn">
-                  <p>TRADE</p>
-                </button>
-              </td>
-            </tr>
+            <Portfolio holdings={portfolio} />
           </table>
         </div>
         <div className="history">

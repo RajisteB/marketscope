@@ -9,25 +9,76 @@ class Overview extends Component {
     super();
     this.state = {
       currentCash: null,
-      pctChg: null,
+      symbols: '',
+      portfolio: null,
+      portTotal: 0,
+      prices: null,
+      pctChg: 0.00,
       gainers: null,
       losers: null,
       active: null,
     }
   }
 
+  getPortfolio = () => {
+    let symbolAry = [];
+    axios.get('/portfolio')
+    .then(res => {
+      console.log(res.data);
+      res.data.map(stock => {
+        symbolAry.push(stock.symbol);
+      })
+      this.setState({
+        portfolio: res.data,
+        symbols: symbolAry.join(','),
+      });
+      this.getPrices(this.state.symbols)
+    })
+    .catch(err => console.log(err));
+  }
+
+  getPrices = (symbols) => {
+    let { portfolio } = this.state;
+    axios.get(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=price`)
+    .then(res => {
+      this.setState({
+        prices: res.data
+      });
+      this.getCurrentCash();
+    })
+    .catch(err => console.log(err));
+  }
+  
   getCurrentCash = () => {
     axios.get('/cash')
-      .then(res => {
-        let totalCash = res.data[0].current;
-        let initial = res.data[0].initial;
-        let pct = ((totalCash - initial) / initial) * 100;
-        this.setState({
-          currentCash: totalCash,
-          pctChg: pct.toFixed(2)
-        })
+    .then(res => {
+      let totalCash = res.data[0].current;
+      this.setState({
+        currentCash: totalCash,
+        });
+        this.getTotalCash();
       })
       .catch(err => console.log(err));
+    }
+
+  getTotalCash = () => {
+    let { currentCash, prices, portfolio } = this.state;
+    let portTotal = 0;
+    let pctChg = 0;
+    let initial = 1000000;
+
+    portfolio.map(stock => {
+      stock.latest = prices[`${stock.symbol}`].price;
+      portTotal += (stock.latest * stock.size);
+      console.log(portTotal);
+    });
+
+    pctChg = ((((this.state.currentCash + portTotal) - initial) / initial) * 100).toFixed(2)
+
+    this.setState({
+      portTotal: this.state.currentCash + portTotal,
+      pctChg,
+    })
   }
 
   getMarketLists = () => {
@@ -45,13 +96,13 @@ class Overview extends Component {
   }
 
   componentDidMount(){
-    this.getCurrentCash();
+    this.getPortfolio();
     this.getMarketLists();
   }
 
   render() {
     let { 
-      currentCash, 
+      portTotal, 
       pctChg,
       gainers,
       losers,
@@ -64,7 +115,7 @@ class Overview extends Component {
         change,
         dollars = null;
 
-    cash = parseInt(currentCash).toLocaleString('en-us', {style: 'currency', currency: 'USD', maximumFractionDigits : 2, minimumFractionDigits : 2});
+    cash = parseInt(portTotal).toLocaleString('en-us', {style: 'currency', currency: 'USD', maximumFractionDigits : 2, minimumFractionDigits : 2});
 
     dollars = cash.split('.')[0];
     change = cash.split('.')[1];

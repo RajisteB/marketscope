@@ -13,13 +13,14 @@
   height: 50vh;
   width: 100%;
   overflow-y: auto;
-  /* background: red; */
+  background: #1D1A37;
   border-radius: 4px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  font-size: 0.92rem;
 }
 
 .portfolio h3, .history h3 {
@@ -41,6 +42,9 @@
   width: 100%;
   border-collapse: collapse;
   /* background: purple; */
+}
+.portfolio-rows:nth-child(even) {
+  background: #302d48;
 }
 
 tr:nth-child(1) {
