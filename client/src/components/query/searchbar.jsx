@@ -15,20 +15,13 @@ class Searchbar extends Component {
       chart1y: [],
       company: "",
       currentCash: 0,
+      contains: null,
+      containSize: 0,
     }
   }
 
-  getStockData = () => {
-    axios.get(`/search/marketdata/${this.state.input}`)
-      .then(res => {
-        this.setState({
-          mktData: res.data
-        });
-      })
-      .catch(err => console.log(err));
-  }
-
   getChartData = (symbol) => {
+  
     axios.get(`/search/chart/${symbol}`)
       .then(res => {
         this.setState({
@@ -38,7 +31,7 @@ class Searchbar extends Component {
           chart1y: res.data.chart1y,
         });
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.response));
   }
 
   getStockData = (symbol) => {
@@ -49,18 +42,18 @@ class Searchbar extends Component {
           input: ""
         });
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.response));
   }
 
   getCompanyData = (symbol) => {
     axios.get(`/search/company/${symbol}`)
       .then(res => {
+        console.log(res);
         this.setState({
           company: res.data
         });
-        console.log(this.state.company);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.response));
   }
 
   getPortfolioData = () => {
@@ -69,9 +62,46 @@ class Searchbar extends Component {
       let current = res.data[0].current;
       this.setState({
         currentCash: current
-      })
+      });
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err.response));
+  }
+
+  getPortfolioHoldings = (symbol) => {
+    let symbolAry = [];
+    let containSymbol = null;
+    let getSymbolObj = null;
+    let symbolSize = 0;
+    axios.get('/portfolio')
+    .then(res => {
+      console.log(res);
+      if (res.data) {
+        // map results array to fill symbol array with currently held stocks
+        res.data.map(stock => {
+          return symbolAry.push(stock.symbol);
+        })
+        containSymbol = symbolAry.includes(symbol);
+        // if the current portfolio already contains this symbol
+        if (containSymbol) {
+          getSymbolObj = res.data.filter(stock => {
+            return stock.symbol === symbol;
+          });
+        // assign the current share size of said symbol
+          symbolSize = getSymbolObj[0].size
+        } else {
+        // else the symbol size is defaulted to 0
+          symbolSize = 0;
+        }
+        
+        this.setState({
+          contains: containSymbol,
+          containSize: symbolSize
+        });
+      } else {
+        return;
+      }
+    })
+    .catch(err => console.log(err.response));
   }
 
   handleChange = (e) => {
@@ -80,25 +110,31 @@ class Searchbar extends Component {
     });
   }
 
+  handleSequence = async(symbol) => {
+    await this.getPortfolioHoldings(symbol);
+    await this.getChartData(symbol);
+    await this.getStockData(symbol);
+    await this.getCompanyData(symbol);
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
-    this.getChartData(this.state.input)
-    this.getStockData(this.state.input)
-    this.getCompanyData(this.state.input)
+    console.log("running submit...");
+    this.handleSequence(this.state.input);
+    console.log(this.state.input);
     this.setState({
       input: ""
     });
   }
 
   componentDidMount() {
-    this.getChartData(this.state.input);
-    this.getStockData(this.state.input);
-    this.getCompanyData(this.state.input);
+    this.handleSequence(this.state.input);
     this.getPortfolioData();
   }
 
   render() {
-    let { input, mktData, chart1d, chart1m, chart6m, chart1y, company, currentCash } = this.state;
+    let { input, mktData, chart1d, chart1m, chart6m, chart1y, company, currentCash, contains, containSize } = this.state;
+
     return (
       <section>
         <div className="searchbar">
@@ -122,6 +158,8 @@ class Searchbar extends Component {
           mktData={mktData}
           company={company}
           currentCash={currentCash}
+          contains={contains}
+          containSize={containSize}
         />
       </section>
     );

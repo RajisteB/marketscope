@@ -11,7 +11,6 @@ class Portfolio extends Component {
   render() {
     let { holdings } = this.props;
     let colorChg = null;
-    console.log(holdings);
 
     if (holdings) {
       return (
@@ -34,7 +33,9 @@ class Portfolio extends Component {
       );
     } else {
       return (
-        <div className="load">Loading...</div>
+        <tr className="load">
+          <td>Loading...</td>
+        </tr>
       )
     }
   }

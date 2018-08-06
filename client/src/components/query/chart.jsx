@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer} from 'recharts';
+import {AreaChart, Area, XAxis, YAxis, ResponsiveContainer} from 'recharts';
 
 class Chart extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class Chart extends Component {
     dataLoaded ? timeline = chartTime : timeline = chartData1m;
   
     if (chartData1m) {
-      console.log(chartData1m);
+      
       return (
         <div className="chart">
           <div className="graph">
@@ -76,9 +76,11 @@ class Chart extends Component {
         </div>
       )
     } else {
-      <div className="chart">
-        <h2>Loading...</h2>
-      </div>
+      return (
+        <div className="chart">
+          <h2>Loading...</h2>
+        </div>
+      )
     }
 
   }

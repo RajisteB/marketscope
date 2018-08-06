@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import Modal from '@material-ui/core/Modal';
-// import axios from 'axios';
+import axios from 'axios';
 
 class TradeModal extends Component {
   constructor(props) {
     super(props);
+    // copying props into state intentionally as there are no prop updates in a trade modal
     this.state = {
       open: false,
-      size: '',
+      size: 0,
       cost: 0,
       buy: false,
       sell: false,
+      order: '',
+      executing: false,
+      sequence: 'Execute',
+      icon: false,
+      disabled: false,
     }
   }
 
@@ -18,7 +24,7 @@ class TradeModal extends Component {
     this.setState({
       open: !this.state.open,
       buy: !this.state.buy
-    })
+    });
   }
 
   toggleModalSell = () => {
@@ -29,12 +35,15 @@ class TradeModal extends Component {
   }
 
   toggleModalClose = () => {
+    // e.preventDefault();
     this.setState({
       open: !this.state.open,
       size: '',
       cost: 0,
       buy: false,
       sell: false,
+      sequence: 'Execute',
+      disabled: false,
     })
   }
 
@@ -43,38 +52,148 @@ class TradeModal extends Component {
       size: e.target.value,
       cost: e.target.value * price
     });
-    console.log(this.state.size);
   }
 
+
+  handleTrade = async (str, e) => {
+    await e.preventDefault();
+    await this.setState({ 
+      order: str, 
+      executing: true,
+    });
+    let trade = {
+      symbol: this.props.mktData.quote.symbol,
+      size: this.state.size,
+      price: this.props.mktData.price,
+      order: this.state.order,
+      value: this.state.cost
+    };
+    console.log(trade);
+
+    if (this.props.contains) {
+      console.log("updating...");
+      console.log(this.props.contains);
+      await axios.put('/portfolio/update', {
+        symbol: this.props.mktData.quote.symbol,
+        size: parseFloat(this.state.size),
+        price: parseFloat(this.props.mktData.price),
+        order: this.state.order,
+        value: parseFloat(this.state.cost)
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+    } else {
+      console.log("adding...");
+      console.log(this.props.contains);
+      await axios.post('/portfolio/add', {
+        symbol: this.props.mktData.quote.symbol,
+        size: parseFloat(this.state.size),
+        price: parseFloat(this.props.mktData.price),
+        order: this.state.order,
+        value: parseFloat(this.state.cost)
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+    }
+    await this.setState({ 
+      executed: false,
+    });
+    await window.location.reload();
+  }
+
+  initExecution = () => {
+    this.setState({
+      sequence: "Executing...",
+      icon: true,
+      disabled: true,
+    })
+  }
+
+  finishExecution = () => {
+    this.setState({
+      sequence: "Completed!",
+      icon: false,
+    })
+  }
+
+  executeTradeButtonUI= async () => {
+    await this.initExecution();
+    await setTimeout(() => {
+      this.finishExecution();
+    }, 4000)
+    await setTimeout((e) => {
+      this.toggleModalClose(e);
+    }, 5000)
+  }
+
+  
+
   render() {
-    let { company, mktData, currentCash } = this.props;
-    let { open, size, buy, sell, cost } = this.state;
+    let { contains, containSize, company, mktData, currentCash } = this.props;
+    let { open, size, buy, sell, cost, order, sequence, disabled, icon } = this.state;
     let side = null;
-    let validateCost = null
+    let validateCost = null;
+    let loading = null;
+    let style = null;
 
-    buy ? side = <option value="BOT">BUY</option> : null;
-    sell ? side = <option value="SLD">SELL</option> : null;
+    loading = icon ? <i className="fas fa-spinner fa-pulse fa-sm"></i> : null;
+    style = disabled ? { opacity: 0.3 } : null;
 
-    cost > currentCash ? 
-    validateCost = (
+    // if portfolio already contains this stock and share size is > 0 i.e "long"
+    if (contains && containSize > 0) {
+      side = buy ? "BOT" : 
+      side = sell ? "SLD" : 
+      null;
+    // else if portfolio already contains this stock and share size is < 0 i.e "short"
+    } else if(contains && containSize < 0) {
+      side = buy ? "COVER" : 
+      side = sell ? "SHRT" : 
+      null;
+    // default if this stock is not already held in portfolio
+    } else {
+      side = buy ? "BOT" : 
+      side = sell ? "SHRT" : 
+      null;
+    }
+
+    // validation conditions for button UI and trade data
+    validateCost = cost > currentCash ? 
+      (
         <div className="actions">
-          <button onClick={this.toggleModalClose}>
+          <button onClick={(e) => this.toggleModalClose(e)}>
             Cancel
           </button>
-          <button disabled onClick={this.toggleModal}>
-            Execute
+          <button type="submit" disabled className="disabled">
+            {sequence}
           </button>
           <p style={{color: 'red'}}>Please enter a smaller size.</p>
         </div>
       ) :
-      validateCost = (
+      size <= 0 || size === '' ? 
+      (
         <div className="actions">
-          <button onClick={this.toggleModalClose}>
+          <button onClick={(e) => this.toggleModalClose(e)}>
             Cancel
           </button>
-          <button onClick={this.toggleModal}>
-            Execute
+          <button type="submit" disabled className="disabled">
+            {sequence}
           </button>
+          <p style={{color: 'red'}}>Please enter a share size.</p>
+        </div>
+      ) :
+        (
+        <div className="actions">
+          <button disabled={disabled} style={style} onClick={(e) => this.toggleModalClose(e)}>
+            Cancel
+          </button>
+          <button type="submit" onClick={this.executeTradeButtonUI}>
+            {loading} {sequence}
+          </button>
+          <p></p>
         </div>
       );
 
@@ -85,11 +204,15 @@ class TradeModal extends Component {
         <Modal open={open}>
           <div className="modal-window">
             <div className="trade-form">
-              <form action="">
+              <form onSubmit={(e) => this.handleTrade(side, e)}>
                 <div className="trade-position">
                   <p>Position:</p><br/>
-                  <select disabled name="positions" id="">
-                    {side}
+                  <select 
+                    readOnly 
+                    value={order} 
+                    name="order"
+                  >
+                    <option value={side}>{side}</option>
                   </select>
                 </div>
                 <div className="trade-symbol">
@@ -110,15 +233,15 @@ class TradeModal extends Component {
                   <span>${mktData.price}</span>
                 </div>
                 <div className="trade-validate">
-                  <p>Cost:</p><br/>
+                  <p>Total:</p><br/>
                   <span>
                     {parseFloat(this.state.cost).toLocaleString('en-us', {style: 'currency', currency: 'USD', maximumFractionDigits : 2, minimumFractionDigits : 2})}
                   </span>
                 </div>
+                <br/>
+                {validateCost}
               </form>
             </div>
-            <br/>
-            {validateCost}
           </div>
         </Modal>
       </div>

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PortfolioSchema = new Schema({
   symbol: {
-    type: String, required: true
+    type: String, required: true, index: true,
   },
   size: {
     type: Number, required: true

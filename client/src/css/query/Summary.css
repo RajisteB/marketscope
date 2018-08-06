@@ -3,7 +3,7 @@
   background: #261E6A;
   border-radius: 6px;
   border: 0.5px solid #060420;
-  width: 40%;
+  width: 60%;
   margin: 0 auto;
   margin-top: 10%;
   padding: 20px;
@@ -30,9 +30,7 @@
   align-items: space-evenly;
   flex-wrap: wrap;
 }
-form > div {
-  /* width: 15%; */
-}
+
 form p {
   margin: 2px;
   letter-spacing: 1px;
@@ -71,9 +69,21 @@ option {
 
 
 .actions {
+  margin: 0 auto;
+  padding-top: 20px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.actions * {
+  flex: 1
+}
+
+.disabled {
+  opacity: 0.3;
 }
 
 .actions button:nth-child(1) {
@@ -91,4 +101,7 @@ option {
   color: lime;
   background: none;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

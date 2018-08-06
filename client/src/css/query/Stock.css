@@ -120,3 +120,20 @@ button {
   margin: 2px;
   font-size: 0.8rem;
 }
+
+@media screen and (max-width: 750px) {
+  .chart {
+    display: none;
+  }
+  .financials {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+  }
+  .buy, .sell {
+    font-size: 1.5rem;
+  }
+}

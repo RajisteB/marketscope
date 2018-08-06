@@ -74,7 +74,7 @@ html, body {
     flex-direction: column;
   }
   .dash-col-02 {
-    display: none;
+    /* display: none; */
   }
 }
 

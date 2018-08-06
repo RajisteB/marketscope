@@ -84,3 +84,10 @@ td > button {
 td, th {
   text-align: center;
 }
+
+@media screen and (max-width: 750px) {
+  .portfolio, .history {
+    font-size: 0.6rem;
+    margin-bottom: 20px;
+  }
+}

@@ -3,9 +3,9 @@ import TradeModal from './trademodal.jsx';
 import '../../css/query/Summary.css';
 
 const Summary = (props) => {
-  let { mktData, company, currentCash } = props;
+  let { mktData, company, currentCash, contains, containSize } = props;
 
-  if (mktData, company) {
+  if (mktData && company) {
     return (
       <div className="summary">
         <div className="logo-container">
@@ -19,6 +19,8 @@ const Summary = (props) => {
           company={company} 
           mktData={mktData} 
           currentCash={currentCash}
+          contains={contains}
+          containSize={containSize}
         />
         <p>{company.company.description}</p>
       </div>

@@ -11,7 +11,7 @@ class Overview extends Component {
       currentCash: null,
       symbols: '',
       portfolio: null,
-      portTotal: 0,
+      portTotal: 1000000,
       prices: null,
       pctChg: 0.00,
       gainers: null,
@@ -21,12 +21,12 @@ class Overview extends Component {
   }
 
   getPortfolio = () => {
-    let symbolAry = [];
     axios.get('/portfolio')
     .then(res => {
-      console.log(res.data);
+      let symbolAry = [];
+
       res.data.map(stock => {
-        symbolAry.push(stock.symbol);
+        return symbolAry.push(stock.symbol);
       })
       this.setState({
         portfolio: res.data,
@@ -38,15 +38,18 @@ class Overview extends Component {
   }
 
   getPrices = (symbols) => {
-    let { portfolio } = this.state;
-    axios.get(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=price`)
-    .then(res => {
-      this.setState({
-        prices: res.data
-      });
-      this.getCurrentCash();
-    })
-    .catch(err => console.log(err));
+    if (symbols !== '') {
+      axios.get(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=price`)
+      .then(res => {
+        this.setState({
+          prices: res.data
+        });
+        this.getCurrentCash();
+      })
+      .catch(err => console.log(err));
+    } else {
+      return;
+    }
   }
   
   getCurrentCash = () => {
@@ -69,14 +72,13 @@ class Overview extends Component {
 
     portfolio.map(stock => {
       stock.latest = prices[`${stock.symbol}`].price;
-      portTotal += (stock.latest * stock.size);
-      console.log(portTotal);
+      return portTotal += (stock.latest * stock.size);
     });
 
-    pctChg = ((((this.state.currentCash + portTotal) - initial) / initial) * 100).toFixed(2)
+    pctChg = ((((currentCash + portTotal) - initial) / initial) * 100).toFixed(2)
 
     this.setState({
-      portTotal: this.state.currentCash + portTotal,
+      portTotal: currentCash + portTotal,
       pctChg,
     })
   }
@@ -85,7 +87,7 @@ class Overview extends Component {
     axios.get('/search/tops')
       .then(res => {
         let list = res.data;
-        console.log(list);
+
         this.setState({
           gainers: list.topGainers,
           losers: list.topLosers,
@@ -98,6 +100,12 @@ class Overview extends Component {
   componentDidMount(){
     this.getPortfolio();
     this.getMarketLists();
+  }
+
+  componentDidUpdate(prevState) {
+    if (this.state.portTotal !== prevState.portTotal) {
+      this.getPortfolio();
+    }
   }
 
   render() {

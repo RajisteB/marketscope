@@ -26,10 +26,10 @@ const Portfolio = require('../models/portfolio_model');
 function updateHoldings (req, res, next) {
   let updatedItem = null;
   console.log('updating: ' + req.body.symbol);
-  Portfolio.findOneAndUpdate({ symbol: req.body.symbol })
+  Portfolio.findOne({ 'symbol': req.body.symbol })
     .then(item => {
 
-      if (item.size - req.body.size === 0 || item.size + req.body.size === 0 ){
+      if ((item.size - req.body.size === 0 || item.size + req.body.size === 0) && (req.body.order === "COVER" || req.body.order === "SLD") ){
         item.remove((err, item) => {
           err ? console.log(err) :
           res.write("deleted...");

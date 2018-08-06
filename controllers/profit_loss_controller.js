@@ -24,7 +24,7 @@ added manually to the db.
 function calculateCurrentPnL(req, res, next) {
   let updatedAmt = null;
   console.log('calculating current PnL...');
-  pnl.findOneAndUpdate({ initial: 1000000 })
+  pnl.findOne({ 'initial': 1000000 })
     .then(amt => {
       let order = req.body.order;
       order === "BOT" || order === "SHRT" ?
@@ -36,8 +36,8 @@ function calculateCurrentPnL(req, res, next) {
       });
       updatedAmt.save((err, profit) => {
         err ? console.log(err) :
-        res.write(JSON.stringify(profit));
-        next();
+        res.write(JSON.stringify(profit), next());
+        // next();
       });
     });
 }
