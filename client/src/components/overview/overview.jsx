@@ -102,12 +102,6 @@ class Overview extends Component {
     this.getMarketLists();
   }
 
-  componentDidUpdate(prevState) {
-    if (this.state.portTotal !== prevState.portTotal) {
-      this.getPortfolio();
-    }
-  }
-
   render() {
     let { 
       portTotal, 

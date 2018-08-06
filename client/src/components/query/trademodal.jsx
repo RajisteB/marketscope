@@ -72,7 +72,6 @@ class TradeModal extends Component {
 
     if (this.props.contains) {
       console.log("updating...");
-      console.log(this.props.contains);
       await axios.put('/portfolio/update', {
         symbol: this.props.mktData.quote.symbol,
         size: parseFloat(this.state.size),
@@ -86,7 +85,6 @@ class TradeModal extends Component {
       .catch(err => console.log(err));
     } else {
       console.log("adding...");
-      console.log(this.props.contains);
       await axios.post('/portfolio/add', {
         symbol: this.props.mktData.quote.symbol,
         size: parseFloat(this.state.size),

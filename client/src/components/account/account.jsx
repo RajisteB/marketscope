@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import axios from 'axios';
+import _ from 'lodash';
 import History from './history.jsx';
 import Portfolio from './portfolio.jsx';
 import '../../css/account/Account.css';
 
 
-class Account extends Component {
+class Account extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +51,7 @@ class Account extends Component {
     axios.get('/portfolio')
     .then(res => {
       let prices = [];
-
+      console.log(res);
       res.data.map(stock => {
         return prices.push(stock.symbol);
       });
@@ -68,8 +69,9 @@ class Account extends Component {
   getTrades = () => {
     axios.get('/trades')
     .then(res => {
+      console.log(res.data);
       this.setState({
-        trades: res.data.sort() 
+        trades: res.data.reverse() 
       });
     })
     .catch(err => console.log(err));
@@ -78,15 +80,6 @@ class Account extends Component {
   componentDidMount() {
     this.getTrades();
     this.getPortfolio();
-  }
-
-  componentDidUpdate(prevState) {
-    if (this.state.trades !== prevState.trades) {
-      this.getTrades();
-    }
-    if (this.state.portfolio !== prevState.portfolio) {
-      this.getPortfolio();
-    }
   }
 
   render() {

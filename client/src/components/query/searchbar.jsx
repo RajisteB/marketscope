@@ -21,7 +21,6 @@ class Searchbar extends Component {
   }
 
   getChartData = (symbol) => {
-  
     axios.get(`/search/chart/${symbol}`)
       .then(res => {
         this.setState({
