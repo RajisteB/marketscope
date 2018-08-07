@@ -47,7 +47,6 @@ class Searchbar extends Component {
   getCompanyData = (symbol) => {
     axios.get(`/search/company/${symbol}`)
       .then(res => {
-        // console.log(res);
         this.setState({
           company: res.data
         });

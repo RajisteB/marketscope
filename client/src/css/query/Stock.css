@@ -20,7 +20,7 @@
 }
 
 .summary {
-  color: #8E94F2;
+  color: #7176c1;
   width: 85%;
   margin: 0 auto;
   display: flex;
@@ -28,19 +28,18 @@
   justify-content: flex-start;
   align-items: center;
   text-align: center; 
-  font-weight: 300;
+  font-weight: 400;
 }
 .summary h1 {
   font-weight: 300;
-  color: goldenrod;
+  color: #8E94F2;
 }
 .summary h6, .summary h4, .summary h2  {
-  color: goldenrod;
+  color: #8E94F2;
 }
 .logo-container {
   height: 60px;
   width: 60px;
-  background: navy;
 }
 .logo-container img {
   max-height: 100%;
@@ -79,12 +78,12 @@ button {
   align-content: center;
   flex-wrap: wrap;
   text-align: center;
-  font-weight: 300;
+  font-weight: 400;
 }
 .financials p {
   width: 25%;
   /* color: #A79FF1; */
-  color: goldenrod;
+  color: #7176c1;
 }
 
 .chart {
@@ -112,8 +111,8 @@ button {
   margin: 8px;
   border-radius: 5px;
   background: none;
-  color: goldenrod;
-  border: 1px solid goldenrod;
+  color: #fff;
+  background: #FF5C00;
   letter-spacing: 1px;
 }
 .timeline button p {

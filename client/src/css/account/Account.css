@@ -1,19 +1,17 @@
 .tables-container {
   height: 100%;
   width: 95%;
-  /* background: blue; */
   margin: 0 auto; 
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  /* align-items: center; */
 }
 
 .portfolio, .history {
   height: 50vh;
   width: 100%;
   overflow-y: auto;
-  background: #1D1A37;
+  background: #fff;
   border-radius: 4px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   display: flex;
@@ -29,56 +27,43 @@
   letter-spacing: 1px;
 }
 #port-symbol {
-  color: #D1CCFF;
+  color: #FF5C00;
 }
 .history {
   height: 30vh;
   overflow-y: auto;
-  /* background: yellow; */
 }
 
 .portfolio-table {
-  color: goldenrod;
+  color: #6f6aa2;
   width: 100%;
   border-collapse: collapse;
-  /* background: purple; */
+}
+.portfolio-rows {
+  border-bottom: 2px solid #ececec;
 }
 .portfolio-rows:nth-child(even) {
-  background: #302d48;
+  background: #fdfdfd;
 }
 
 tr:nth-child(1) {
   border-bottom: 0.8px solid cyan;
 }
-td > button {
-  border-radius: 4px;
-  width: 80%;
-  text-align: center;
-  border: none;
-  border: 1px solid #8678FF;
-  background: none;
-}
-.table-btn p {
-  color: #D1CCFF;
-  margin: 0;
-  font-size: 15px;
-  letter-spacing: 1px;
-}
 
 .trade-history-table {
   width: 100%;
-  color: goldenrod;
+  color: #6f6aa2;
   border-collapse: collapse;
 }
 .trade-history-table > tr:nth-child(1) {
   border-bottom: 0.5px solid #FF5C00;
 }
 .history-row {
-  color: #FFBB00;
-  background: #100865;
+  color: #ffc119;
+  background: #4D3ED4;
 }
 .history-row > td:nth-child(1) {
-  color: #D1CCFF;
+  color: #ececec;
 }
 
 td, th {

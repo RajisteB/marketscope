@@ -5,7 +5,6 @@ import axios from 'axios';
 class TradeModal extends Component {
   constructor(props) {
     super(props);
-    // copying props into state intentionally as there are no prop updates in a trade modal
     this.state = {
       open: false,
       size: 0,
@@ -68,10 +67,8 @@ class TradeModal extends Component {
       order: this.state.order,
       value: this.state.cost
     };
-    console.log(trade);
 
     if (this.props.contains) {
-      console.log("updating...");
       await axios.put('/portfolio/update', {
         symbol: this.props.mktData.quote.symbol,
         size: parseFloat(this.state.size),
@@ -84,7 +81,6 @@ class TradeModal extends Component {
       })
       .catch(err => console.log(err));
     } else {
-      console.log("adding...");
       await axios.post('/portfolio/add', {
         symbol: this.props.mktData.quote.symbol,
         size: parseFloat(this.state.size),
@@ -137,10 +133,8 @@ class TradeModal extends Component {
     let { open, size, buy, sell, cost, order, sequence, disabled, icon } = this.state;
     let side = null;
     let validateCost = null;
-    let loading = null;
     let style = null;
 
-    loading = icon ? <i className="fas fa-spinner fa-pulse fa-sm"></i> : null;
     style = disabled ? { opacity: 0.3 } : null;
 
     // if portfolio already contains this stock and share size is > 0 i.e "long"
@@ -191,7 +185,7 @@ class TradeModal extends Component {
             Cancel
           </button>
           <button type="submit" onClick={this.executeTradeButtonUI}>
-            {loading} {sequence}
+            {sequence}
           </button>
           <p></p>
         </div>

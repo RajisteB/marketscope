@@ -19,7 +19,6 @@ class App extends Component {
   }
 
   getTrades = () => {
-    console.log("In [App.jsx] getTrades func");
     axios.get('/trades')
     .then(res => {
       this.setState({

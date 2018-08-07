@@ -32,8 +32,8 @@ class Chart extends Component {
               <AreaChart data={timeline} >
                 <defs>
                   <linearGradient id="colorData" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#4D3ED4" stopOpacity={0.8}/>
-                    <stop offset="95%" stopColor="#4D3ED4" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#FF5C00" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#FF5C00" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <XAxis 
@@ -44,15 +44,16 @@ class Chart extends Component {
                   type="number"
                   axisLine={false}
                   orientation="right"
+                  allowDecimals={false}
                   domain={['auto', 'dataMax']}
                   label={{fill: 'tomato'}}
-                  width={40}
+                  width={50}
                 />
                 <Area 
                   type="basis" 
                   dataKey="close" 
-                  stroke="gold"
-                  fillOpacity={1}
+                  stroke="#FF5C00"
+                  fillOpacity={0.05}
                   fill="url(#colorData)"
                   dot={false}
                 />
