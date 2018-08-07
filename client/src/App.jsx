@@ -11,7 +11,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      trades: []
+      trades: [],
+      holdings: '',
+      portfolio: '',
+      currentPrices: [],
     }
   }
 
@@ -19,7 +22,6 @@ class App extends Component {
     console.log("In [App.jsx] getTrades func");
     axios.get('/trades')
     .then(res => {
-      console.log(res.data);
       this.setState({
         trades: res.data.reverse() 
       });
@@ -27,12 +29,61 @@ class App extends Component {
     .catch(err => console.log(err));
   }
 
+  getCurrentPrices = (symbols) => {
+    if (symbols !== '') {
+      axios.get(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=price`)
+      .then(res => {
+        this.setState({
+          currentPrices: res.data
+        });  
+        this.getPortfolioPnL();
+      })
+      .catch(err => console.log(err));
+    } else {
+      return;
+    }
+  }
+
+  getPortfolioPnL = () => {
+    let { holdings, currentPrices } = this.state;
+    
+    holdings.map(held => {
+      held.latest = currentPrices[`${held.symbol}`].price;
+      held.total = (held.latest - held.price).toFixed(2);
+      held.profits = (held.latest * held.size) - (held.size * held.price);
+      return holdings;
+    });
+    
+    this.setState({
+      portfolio: holdings
+    })
+  }
+
+  getPortfolio = () => {
+    axios.get('/portfolio')
+    .then(res => {
+      let prices = [];
+      res.data.map(stock => {
+        return prices.push(stock.symbol);
+      });
+
+      this.setState({
+        holdings: res.data,
+        currentPrices: prices.join(','),
+      });
+
+      this.getCurrentPrices(this.state.currentPrices);
+    })
+    .catch(err => console.log(err));
+  }
+
   componentDidMount() {
     this.getTrades();
+    this.getPortfolio();
   }
 
   render() {
-    let { trades } = this.state;
+    let { trades, portfolio } = this.state;
 
     return (
       <div className="App">
@@ -45,10 +96,10 @@ class App extends Component {
               </div>
             </div>
             <div className="dash-col-02">
-              <Searchbar executed={this.getTrades}/>
+              <Searchbar executed={this.getTrades} refresh={this.getPortfolio}/>
             </div>
             <div className="dash-col-03">
-              <Account trades={trades} />
+              <Account trades={trades} portfolio={portfolio}/>
             </div>
           </div>
           <Footer />

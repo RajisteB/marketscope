@@ -101,7 +101,8 @@ class TradeModal extends Component {
       executed: false,
     });
     // await window.location.reload();
-    this.props.executed();
+    await this.props.executed();
+    await this.props.refresh();
   }
 
   initExecution = () => {
@@ -132,7 +133,7 @@ class TradeModal extends Component {
   
 
   render() {
-    let { contains, containSize, company, mktData, currentCash, executed } = this.props;
+    let { contains, containSize, company, mktData, currentCash } = this.props;
     let { open, size, buy, sell, cost, order, sequence, disabled, icon } = this.state;
     let side = null;
     let validateCost = null;

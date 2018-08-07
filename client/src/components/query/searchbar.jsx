@@ -133,7 +133,7 @@ class Searchbar extends Component {
 
   render() {
     let { input, mktData, chart1d, chart1m, chart6m, chart1y, company, currentCash, contains, containSize } = this.state;
-    let { executed } = this.props;
+    let { executed, refresh } = this.props;
 
     return (
       <section>
@@ -161,6 +161,7 @@ class Searchbar extends Component {
           contains={contains}
           containSize={containSize}
           executed={executed}
+          refresh={refresh}
         />
       </section>
     );
