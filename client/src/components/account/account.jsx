@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import axios from 'axios';
-import _ from 'lodash';
+// import _ from 'lodash';
 import History from './history.jsx';
 import Portfolio from './portfolio.jsx';
 import '../../css/account/Account.css';
@@ -10,7 +10,6 @@ class Account extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      trades: [],
       holdings: '',
       portfolio: '',
       currentPrices: [],
@@ -66,24 +65,19 @@ class Account extends PureComponent {
     .catch(err => console.log(err));
   }
 
-  getTrades = () => {
-    axios.get('/trades')
-    .then(res => {
-      console.log(res.data);
-      this.setState({
-        trades: res.data.reverse() 
-      });
-    })
-    .catch(err => console.log(err));
+  
+
+  testUpdates = () => {
+    console.log('In [Account.jsx] test update func');
   }
 
   componentDidMount() {
-    this.getTrades();
     this.getPortfolio();
   }
 
   render() {
-    let { trades, portfolio } = this.state;
+    let { portfolio } = this.state;
+    let { trades } = this.props;
     
     return (
       <div className="tables-container">
@@ -114,7 +108,7 @@ class Account extends PureComponent {
                 <th>Order</th>
                 <th>Exchange</th>
               </tr>
-              <History trades={trades} />
+              <History trades={trades} changed={this.testUpdates}/>
             </tbody>
           </table>
         </div>

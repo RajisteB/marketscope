@@ -47,7 +47,7 @@ class Searchbar extends Component {
   getCompanyData = (symbol) => {
     axios.get(`/search/company/${symbol}`)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({
           company: res.data
         });
@@ -73,7 +73,7 @@ class Searchbar extends Component {
     let symbolSize = 0;
     axios.get('/portfolio')
     .then(res => {
-      console.log(res);
+      // console.log(res);
       if (res.data) {
         // map results array to fill symbol array with currently held stocks
         res.data.map(stock => {
@@ -133,6 +133,7 @@ class Searchbar extends Component {
 
   render() {
     let { input, mktData, chart1d, chart1m, chart6m, chart1y, company, currentCash, contains, containSize } = this.state;
+    let { executed } = this.props;
 
     return (
       <section>
@@ -159,6 +160,7 @@ class Searchbar extends Component {
           currentCash={currentCash}
           contains={contains}
           containSize={containSize}
+          executed={executed}
         />
       </section>
     );

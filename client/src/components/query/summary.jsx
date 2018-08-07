@@ -3,7 +3,7 @@ import TradeModal from './trademodal.jsx';
 import '../../css/query/Summary.css';
 
 const Summary = (props) => {
-  let { mktData, company, currentCash, contains, containSize } = props;
+  let { mktData, company, currentCash, contains, containSize, executed } = props;
 
   if (mktData && company) {
     return (
@@ -21,6 +21,7 @@ const Summary = (props) => {
           currentCash={currentCash}
           contains={contains}
           containSize={containSize}
+          executed={executed}
         />
         <p>{company.company.description}</p>
       </div>

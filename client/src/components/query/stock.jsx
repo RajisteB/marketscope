@@ -5,7 +5,7 @@ import Chart from './chart.jsx';
 import '../../css/query/Stock.css';
 
 const Stock = (props) => {
-  let { chartData1d, chartData1m, chartData6m, chartData1y, company, mktData, currentCash, contains, containSize } = props;
+  let { chartData1d, chartData1m, chartData6m, chartData1y, company, mktData, currentCash, contains, containSize, executed } = props;
   
   if (mktData && company) {
 
@@ -17,6 +17,7 @@ const Stock = (props) => {
           currentCash={currentCash}
           contains={contains}
           containSize={containSize}
+          executed={executed}
         />
         <Financials mktData={mktData} />
         <Chart 
