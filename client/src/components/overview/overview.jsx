@@ -117,7 +117,7 @@ class Overview extends Component {
         change,
         dollars = null;
 
-    cash = parseInt(portTotal).toLocaleString('en-us', {style: 'currency', currency: 'USD', maximumFractionDigits : 2, minimumFractionDigits : 2});
+    cash = portTotal.toLocaleString('en-us', {style: 'currency', currency: 'USD', maximumFractionDigits : 2, minimumFractionDigits : 2});
 
     dollars = cash.split('.')[0];
     change = cash.split('.')[1];

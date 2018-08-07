@@ -60,13 +60,6 @@ class TradeModal extends Component {
       order: str, 
       executing: true,
     });
-    let trade = {
-      symbol: this.props.mktData.quote.symbol,
-      size: this.state.size,
-      price: this.props.mktData.price,
-      order: this.state.order,
-      value: this.state.cost
-    };
 
     if (this.props.contains) {
       await axios.put('/portfolio/update', {
@@ -130,7 +123,7 @@ class TradeModal extends Component {
 
   render() {
     let { contains, containSize, company, mktData, currentCash } = this.props;
-    let { open, size, buy, sell, cost, order, sequence, disabled, icon } = this.state;
+    let { open, size, buy, sell, cost, order, sequence, disabled } = this.state;
     let side = null;
     let validateCost = null;
     let style = null;
