@@ -8,10 +8,10 @@
 }
 
 .portfolio, .history {
-  height: 50vh;
+  height: 40vh;
   width: 100%;
   overflow-y: auto;
-  background: #fff;
+  background: #141414;
   border-radius: 4px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   display: flex;
@@ -22,12 +22,12 @@
 }
 .history::-webkit-scrollbar,
 .portfolio::-webkit-scrollbar  {
-  background: #fff;
-  width: 0.8rem;
+  background: #1e1e1e;
+  width: 0.3rem;
 }
 .history::-webkit-scrollbar-thumb,
 .portfolio::-webkit-scrollbar-thumb {
-  background: #948be5;
+  background: #5b5b5b;
   border-radius: 6px;
 }
 
@@ -37,23 +37,19 @@
   letter-spacing: 1px;
 }
 #port-symbol {
-  color: #FF5C00;
+  color: #c9c5f2;
 }
 .history {
-  height: 30vh;
   overflow-y: auto;
 }
 
 .portfolio-table {
-  color: #6f6aa2;
+  color: goldenrod;
   width: 100%;
   border-collapse: collapse;
 }
-.portfolio-rows {
-  border-bottom: 2px solid #ececec;
-}
 .portfolio-rows:nth-child(even) {
-  background: #fdfdfd;
+  background: #1a1b25;
 }
 
 tr:nth-child(1) {
@@ -62,7 +58,7 @@ tr:nth-child(1) {
 
 .trade-history-table {
   width: 100%;
-  color: #6f6aa2;
+  color: goldenrod;
   border-collapse: collapse;
 }
 .trade-history-table > tr:nth-child(1) {
@@ -70,10 +66,10 @@ tr:nth-child(1) {
 }
 .history-row {
   color: #ffc119;
-  background: #4D3ED4;
+  background: #1a1b25;
 }
 .history-row > td:nth-child(1) {
-  color: #ececec;
+  color: #c9c5f2;
 }
 
 td, th {
@@ -82,6 +78,25 @@ td, th {
 
 
 @media screen and (max-width: 750px) {
+  .portfolio, .history {
+    font-size: 0.72rem;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 1400px) {
+  .portfolio, .history {
+    font-size: 1.2rem;
+  }
+  .portfolio {
+    margin-top: -100px;
+  }
+  .history {
+    margin: 30px 0px;
+  }
+}
+
+@media screen and (max-width: 350px) {
   .portfolio, .history {
     font-size: 0.6rem;
     margin-bottom: 20px;

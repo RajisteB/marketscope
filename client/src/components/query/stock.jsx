@@ -1,7 +1,7 @@
 import React from 'react';
 import Summary from './summary.jsx';
 import Financials from './financials.jsx';
-import Chart from './chart.jsx';
+import StockChart from './chart.jsx';
 import '../../css/query/Stock.css';
 
 const Stock = (props) => {
@@ -21,7 +21,7 @@ const Stock = (props) => {
           refresh={refresh}
         />
         <Financials mktData={mktData} />
-        <Chart 
+        <StockChart 
           chartData1d={chartData1d}
           chartData1m={chartData1m}
           chartData6m={chartData6m}

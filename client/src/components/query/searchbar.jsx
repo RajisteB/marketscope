@@ -117,7 +117,6 @@ class Searchbar extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("running submit...");
     this.handleSequence(this.state.input);
     console.log(this.state.input);
     this.setState({

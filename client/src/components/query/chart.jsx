@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {AreaChart, Area, XAxis, YAxis, ResponsiveContainer} from 'recharts';
 
-class Chart extends Component {
+class StockChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ class Chart extends Component {
     let { chartTime, dataLoaded } = this.state;
     let timeline = null;
     dataLoaded ? timeline = chartTime : timeline = chartData1m;
-  
+    
     if (chartData1m) {
       
       return (
@@ -32,8 +32,8 @@ class Chart extends Component {
               <AreaChart data={timeline} >
                 <defs>
                   <linearGradient id="colorData" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#FF5C00" stopOpacity={0.8}/>
-                    <stop offset="95%" stopColor="#FF5C00" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#4D3ED4" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#4D3ED4" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <XAxis 
@@ -52,8 +52,8 @@ class Chart extends Component {
                 <Area 
                   type="basis" 
                   dataKey="close" 
-                  stroke="#FF5C00"
-                  fillOpacity={0.05}
+                  stroke="#4D3ED4"
+                  fillOpacity={0.7}
                   fill="url(#colorData)"
                   dot={false}
                 />
@@ -87,4 +87,4 @@ class Chart extends Component {
   }
 }
 
-export default Chart;
+export default StockChart;

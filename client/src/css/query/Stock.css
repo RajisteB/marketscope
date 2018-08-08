@@ -20,7 +20,7 @@
 }
 
 .summary {
-  color: #7176c1;
+  color: #8E94F2;
   width: 85%;
   margin: 0 auto;
   display: flex;
@@ -28,14 +28,15 @@
   justify-content: flex-start;
   align-items: center;
   text-align: center; 
-  font-weight: 400;
+  font-weight: 300;
+  letter-spacing: 0.4px;
 }
 .summary h1 {
   font-weight: 300;
-  color: #8E94F2;
+  color: goldenrod;
 }
 .summary h6, .summary h4, .summary h2  {
-  color: #8E94F2;
+  color: goldenrod;
 }
 .logo-container {
   height: 60px;
@@ -63,10 +64,18 @@ button {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
 }
 .buy {
-  background: #4D3ED4;
+  border: 4px solid #4D3ED4;
+  background: none;
+  color: gold;
 }
 .sell {
-  background: rgb(245, 63, 31);
+  border: 4px solid rgb(245, 63, 31);
+  background: none;
+  color: gold;
+}
+
+.buy:focus, .sell:focus {
+  outline: 0;
 }
 
 .financials {
@@ -83,7 +92,7 @@ button {
 .financials p {
   width: 25%;
   /* color: #A79FF1; */
-  color: #7176c1;
+  color: #8E94F2;
 }
 
 .chart {
@@ -112,7 +121,7 @@ button {
   border-radius: 5px;
   background: none;
   color: #fff;
-  background: #FF5C00;
+  background: #4D3ED4;
   letter-spacing: 1px;
 }
 .timeline button p {

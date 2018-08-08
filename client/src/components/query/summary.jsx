@@ -8,9 +8,6 @@ const Summary = (props) => {
   if (mktData && company) {
     return (
       <div className="summary">
-        <div className="logo-container">
-          <img src={mktData.logo.url} alt=""/>
-        </div>
         <h1>{company.company.symbol}</h1>
         <h2>${parseFloat(mktData.price).toFixed(2)}</h2>
         <h4>{parseFloat(mktData.quote.changePercent).toFixed(2)}%</h4>

@@ -151,7 +151,7 @@ class TradeModal extends Component {
     validateCost = cost > currentCash ? 
       (
         <div className="actions">
-          <button onClick={(e) => this.toggleModalClose(e)}>
+          <button type="button" onClick={(e) => this.toggleModalClose(e)}>
             Cancel
           </button>
           <button type="submit" disabled className="disabled">
@@ -163,7 +163,7 @@ class TradeModal extends Component {
       size <= 0 || size === '' ? 
       (
         <div className="actions">
-          <button onClick={(e) => this.toggleModalClose(e)}>
+          <button type="button" onClick={(e) => this.toggleModalClose(e)}>
             Cancel
           </button>
           <button type="submit" disabled className="disabled">
@@ -174,7 +174,7 @@ class TradeModal extends Component {
       ) :
         (
         <div className="actions">
-          <button disabled={disabled} style={style} onClick={(e) => this.toggleModalClose(e)}>
+          <button disabled={disabled} style={style} type="button" onClick={(e) => this.toggleModalClose(e)}>
             Cancel
           </button>
           <button type="submit" onClick={this.executeTradeButtonUI}>
@@ -186,8 +186,8 @@ class TradeModal extends Component {
 
     return (
       <div className="trading-container">
-        <button className="buy" onClick={this.toggleModalBuy}>BUY</button>
-        <button className="sell" onClick={this.toggleModalSell}>SELL</button>
+        <button type="button" className="buy" onClick={this.toggleModalBuy}>BUY</button>
+        <button type="button" className="sell" onClick={this.toggleModalSell}>SELL</button>
         <Modal open={open}>
           <div className="modal-window">
             <div className="trade-form">
