@@ -5,7 +5,6 @@ import Navbar from './components/navigation/navbar.jsx';
 import Searchbar from './components/query/searchbar.jsx';
 import Overview from './components/overview/overview.jsx';
 import Account from './components/account/account.jsx';
-import Footer from './components/footer/footer.jsx';
 
 class App extends Component {
   constructor() {
@@ -101,7 +100,7 @@ class App extends Component {
               <Account trades={trades} portfolio={portfolio}/>
             </div>
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </div>
     );
