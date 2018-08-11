@@ -20,7 +20,7 @@ class Portfolio extends Component {
             <tr key={idx} className="portfolio-rows">
               <td id="port-symbol">{held.symbol}</td>
               <td>{held.size}</td>
-              <td>${held.price}</td>
+              <td>${held.price.toFixed(2)}</td>
               <td style={{color: colorChg}}>{held.total}</td>
               <td style={{color: colorChg}}>
                 {
