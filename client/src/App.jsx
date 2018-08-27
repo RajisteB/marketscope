@@ -78,6 +78,11 @@ class App extends Component {
   componentDidMount() {
     this.getTrades();
     this.getPortfolio();
+
+    // ping Heroku app every 10 mins
+    setInterval(() => {
+      axios.get('https://damp-depths-60270.herokuapp.com/')
+    }, 600000);
   }
 
   render() {
