@@ -67,11 +67,15 @@ button {
   border: 4px solid #4D3ED4;
   background: none;
   color: gold;
+  margin: 0;
+  padding: 0;
 }
 .sell {
   border: 4px solid rgb(245, 63, 31);
   background: none;
   color: gold;
+  margin: 0;
+  padding: 0;
 }
 
 .buy:focus, .sell:focus {
