@@ -19,7 +19,12 @@ I knew this would have to be a full stack app in order to monitor and save each 
 * Third-Party API (IEX Stock Exchange)
 
 #### Design:
-For the initial wireframe and UI design, I've used AdobeXD to get a solid visualization of the overall layout, colors and feel of the app before starting to get into the actual coding and development process. I decided to go with a 3 column dashboard layout for desktop and laptop sizes which is fully responsive at the lower screen sizes.
+For the initial wireframe and UI design, I've used AdobeXD to get a solid visualization of the overall layout, colors and feel of the app before starting to get into the actual coding and development process. I decided to go with a 3 column dashboard layout for desktop and laptop sizes which is fully responsive at the lower screen sizes. Although I initially was a fan of the pure white background in the mockup phase, once in the development phase, the darker background seemed to present much better as a finanicial type of app so I decided to stick with those changes.
 
+* AdobeXD UI Mockup (Before)
 ![alt text](https://github.com/RajisteB/marketscope/blob/master/client/src/images/Web%201920%20%E2%80%93%202.jpg)
  
+* Live Site (After)
+![alt text](https://github.com/RajisteB/marketscope/blob/master/client/src/images/Marketscope%20-%20SC.png)
+
+
