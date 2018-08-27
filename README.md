@@ -36,3 +36,7 @@ There were not too many issues in either the design or the development process, 
 
 #### Solution(s):
 The solution (after thoroughly reading through the docs a few times) was to just write the response with res.write(), and then, within the routes, call next() so the backend knows to go on to the next function without sending res.end(). Res.end() is called at the end of the function that is executed last, thus, giving me the flexibility I needed to properly store all the releveant information and preventing "ERROR: Headers have already been set" from being thrown everytime a user makes a trade.
+
+
+## Questions, Comments or Inquiries?
+Please don't hesistate to reach out to: Rajisteb@gmail.com if you have any questions or comments! Thanks!
