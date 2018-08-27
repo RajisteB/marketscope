@@ -21,5 +21,5 @@ I knew this would have to be a full stack app in order to monitor and save each 
 #### Design:
 For the initial wireframe and UI design, I've used AdobeXD to get a solid visualization of the overall layout, colors and feel of the app before starting to get into the actual coding and development process. I decided to go with a 3 column dashboard layout for desktop and laptop sizes which is fully responsive at the lower screen sizes.
 
-
+![alt text](https://github.com/RajisteB/marketscope/blob/master/client/src/images/Web%201920%20%E2%80%93%202.jpg)
  
