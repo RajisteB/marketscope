@@ -5,8 +5,8 @@ import Navbar from './components/navigation/navbar.jsx';
 import Searchbar from './components/query/searchbar.jsx';
 import Overview from './components/overview/overview.jsx';
 import Account from './components/account/account.jsx';
-const key = `${process.env.REACT_APP_IEX_API_KEY}`;
-const token = "&token=" + key;
+const test_key = `Tpk_fdf7704ce7f44b7bbef8c6b698ef31d7`;
+const token = "&token=" + test_key;
 
 class App extends Component {
   constructor() {

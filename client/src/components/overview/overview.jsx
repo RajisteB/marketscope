@@ -3,8 +3,8 @@ import '../../css/overview/Overview.css';
 import MarketList from './marketlist.jsx';
 import ActiveMarketList from './activemarketlist.jsx';
 import axios from 'axios';
-const key = process.env.REACT_APP_IEX_API_KEY;
-const token = "&token=" + key;
+const test_key = 'Tpk_fdf7704ce7f44b7bbef8c6b698ef31d7';
+const token = "&token=" + test_key;
 
 class Overview extends Component {
   constructor() {
