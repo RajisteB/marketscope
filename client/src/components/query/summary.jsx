@@ -1,9 +1,11 @@
 import React from 'react';
 import TradeModal from './trademodal.jsx';
 import '../../css/query/Summary.css';
+import _ from 'underscore.string';
 
 const Summary = (props) => {
   let { mktData, company, currentCash, contains, containSize, executed, refresh } = props;
+  let described = _(company.company.description).truncate(50);
 
   if (mktData && company) {
     return (
@@ -21,7 +23,7 @@ const Summary = (props) => {
           executed={executed}
           refresh={refresh}
         />
-        <p>{company.company.description}</p>
+        <p>{described._wrapped}</p>
       </div>
     )
   } else {

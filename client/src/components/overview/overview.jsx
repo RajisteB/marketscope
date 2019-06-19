@@ -3,6 +3,8 @@ import '../../css/overview/Overview.css';
 import MarketList from './marketlist.jsx';
 import ActiveMarketList from './activemarketlist.jsx';
 import axios from 'axios';
+const key = process.env.REACT_APP_IEX_API_KEY;
+const token = "&token=" + key;
 
 class Overview extends Component {
   constructor() {
@@ -11,7 +13,7 @@ class Overview extends Component {
       currentCash: null,
       symbols: '',
       portfolio: null,
-      portTotal: 1000000,
+      portTotal: 0,
       prices: null,
       pctChg: 0.00,
       gainers: null,
@@ -39,7 +41,7 @@ class Overview extends Component {
 
   getPrices = (symbols) => {
     if (symbols !== '') {
-      axios.get(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=price`)
+      axios.get(`https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=price${token}`)
       .then(res => {
         this.setState({
           prices: res.data
@@ -97,9 +99,10 @@ class Overview extends Component {
       .catch(err => console.log(err));
   }
 
-  componentDidMount(){
-    this.getPortfolio();
-    this.getMarketLists();
+  async componentDidMount(){
+    await this.getPortfolio();
+    await this.getMarketLists();
+    // await this.getTotalCash();
   }
 
   render() {

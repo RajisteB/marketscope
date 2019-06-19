@@ -5,9 +5,8 @@ const Financials = (props) => {
   let exchange = null;
   
   if (mktData) {
-
-    mktData.quote.primaryExchange === "New York Stock Exchange" ?
-    exchange = "NYSE" : exchange = mktData.quote.primaryExchange.split(" ")[0];
+    mktData.co.exchange === "New York Stock Exchange" ?
+    exchange = "NYSE" : exchange = mktData.co.exchange.split(" ")[0];
 
     return (
       <div className="financials">

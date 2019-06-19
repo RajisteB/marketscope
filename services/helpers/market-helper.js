@@ -1,9 +1,11 @@
 const axios = require('axios');
-const base_URL = 'https://api.iextrading.com/1.0/';
+const base_URL = 'https://sandbox.iexapis.com/stable/';
+const iex = require('../../config/iex');
+let token = "?token=" + iex.public_token;
 
 function getBatchQuotes(req, res) {
   axios
-    .get(base_URL + "stock/market/batch?symbols=" + req.params.id + "&types=quote")
+    .get(base_URL + "stock/market/batch?symbols=" + req.params.id + "&types=quote" + token)
     .then(batch => {
       res.send(batch.data);
     })
@@ -12,15 +14,17 @@ function getBatchQuotes(req, res) {
 
 function getMarketData(req, res) {
   axios.all([
-    axios.get(base_URL + "stock/" + req.params.id + "/price"),
-    axios.get(base_URL + "stock/" + req.params.id + "/quote?displayPercent=true"),
-    axios.get(base_URL + "stock/" + req.params.id + "/logo"),
+    axios.get(base_URL + "stock/" + req.params.id + "/price" + token),
+    axios.get(base_URL + "stock/" + req.params.id + "/quote" + token + "&displayPercent=true"),
+    axios.get(base_URL + "stock/" + req.params.id + "/logo" + token),
+    axios.get(base_URL + "stock/" + req.params.id + "/company" + token)
   ])
-  .then(axios.spread((priceRes, quoteRes, logoRes) => {
+  .then(axios.spread((priceRes, quoteRes, logoRes, coRes) => {
     res.send({ 
       price: priceRes.data, 
       quote: quoteRes.data, 
       logo: logoRes.data, 
+      co: coRes.data
     })
   }))
   .catch(err => console.log(err));
@@ -28,12 +32,12 @@ function getMarketData(req, res) {
 
 function getChartData(req, res) {
   axios.all([
-    axios.get(base_URL + "stock/" + req.params.id + "/chart/1d"),
-    axios.get(base_URL + "stock/" + req.params.id + "/chart/1m"),
-    axios.get(base_URL + "stock/" + req.params.id + "/chart/3m"),
-    axios.get(base_URL + "stock/" + req.params.id + "/chart/6m"),
-    axios.get(base_URL + "stock/" + req.params.id + "/chart/1y"),
-    axios.get(base_URL + "stock/" + req.params.id + "/chart/5y"),
+    axios.get(base_URL + "stock/" + req.params.id + "/chart/1d" + token),
+    axios.get(base_URL + "stock/" + req.params.id + "/chart/1m" + token),
+    axios.get(base_URL + "stock/" + req.params.id + "/chart/3m" + token),
+    axios.get(base_URL + "stock/" + req.params.id + "/chart/6m" + token),
+    axios.get(base_URL + "stock/" + req.params.id + "/chart/1y" + token),
+    axios.get(base_URL + "stock/" + req.params.id + "/chart/5y" + token),
   ])
   .then(axios.spread((chart1dRes, chart1mRes, chart3mRes, chart6mRes, chart1yRes, chart5yRes) => {
     res.send({
@@ -50,8 +54,8 @@ function getChartData(req, res) {
 
 function getCompanyData(req, res) {
   axios.all([
-    axios.get(base_URL + "stock/" + req.params.id + "/financials"),
-    axios.get(base_URL + "stock/" + req.params.id + "/company"),
+    axios.get(base_URL + "stock/" + req.params.id + "/financials" + token),
+    axios.get(base_URL + "stock/" + req.params.id + "/company" + token),
   ])
   .then(axios.spread((financialsRes, companyRes ) => {
     res.send({
@@ -63,9 +67,9 @@ function getCompanyData(req, res) {
 
 function getTops(req, res) {
   axios.all([
-    axios.get(base_URL + "stock/market/list/mostactive?displayPercent=true"),
-    axios.get(base_URL + "stock/market/list/gainers?displayPercent=true"),
-    axios.get(base_URL + "stock/market/list/losers?displayPercent=true"),
+    axios.get(base_URL + "stock/market/list/mostactive" + token + "&displayPercent=true"),
+    axios.get(base_URL + "stock/market/list/gainers" + token + "&displayPercent=true"),
+    axios.get(base_URL + "stock/market/list/losers" + token + "&displayPercent=true"),
   ])
   .then(axios.spread((activeRes, gainerRes, loserRes) => {
     res.send({

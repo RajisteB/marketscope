@@ -5,6 +5,8 @@ import Navbar from './components/navigation/navbar.jsx';
 import Searchbar from './components/query/searchbar.jsx';
 import Overview from './components/overview/overview.jsx';
 import Account from './components/account/account.jsx';
+const key = `${process.env.REACT_APP_IEX_API_KEY}`;
+const token = "&token=" + key;
 
 class App extends Component {
   constructor() {
@@ -29,7 +31,7 @@ class App extends Component {
 
   getCurrentPrices = (symbols) => {
     if (symbols !== '') {
-      axios.get(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=price`)
+      axios.get(`https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=price${token}`)
       .then(res => {
         this.setState({
           currentPrices: res.data
